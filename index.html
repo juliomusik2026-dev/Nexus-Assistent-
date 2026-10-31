@@ -1,0 +1,84 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#080b12">
+<title>NEXUS AI</title>
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;background:#080b12;color:#eaf2ff;
+ font-family:-apple-system,BlinkMacSystemFont,sans-serif;
+ min-height:100vh;display:flex;justify-content:center;
+}
+.app{width:100%;max-width:480px;padding:28px 22px}
+header{display:flex;justify-content:space-between;align-items:center}
+.logo{font-size:24px;font-weight:700;letter-spacing:5px}
+.status{font-size:11px;color:#65d9ff}
+.center{text-align:center;margin-top:100px}
+.orb{
+ width:170px;height:170px;border-radius:50%;
+ margin:auto;display:grid;place-items:center;
+ border:1px solid #247ca8;
+ box-shadow:0 0 35px #087eaa55,inset 0 0 35px #087eaa33;
+ animation:pulse 3s infinite;
+}
+.core{
+ width:105px;height:105px;border-radius:50%;
+ background:radial-gradient(circle,#8beaff,#12658e 55%,#07101d);
+ box-shadow:0 0 35px #22baff;
+}
+@keyframes pulse{
+ 50%{transform:scale(1.04);box-shadow:0 0 55px #087eaa88}
+}
+h1{font-size:30px;letter-spacing:8px;margin:30px 0 8px}
+.sub{color:#8293a8;font-size:13px}
+.output{
+ margin-top:55px;padding:20px;border:1px solid #1c3448;
+ border-radius:15px;background:#0c1420;min-height:75px;
+ color:#b8cce0;font-size:14px;line-height:1.6;
+}
+.controls{display:flex;justify-content:center;margin-top:25px}
+button{
+ border:1px solid #247ca8;background:#102235;color:#dff8ff;
+ padding:16px 28px;border-radius:30px;font-size:15px;
+}
+button:active{background:#164d70}
+footer{text-align:center;color:#52677c;font-size:11px;margin-top:65px}
+</style>
+</head>
+<body>
+<div class="app">
+<header>
+ <div class="logo">NEXUS</div>
+ <div class="status">● SYSTEM ONLINE</div>
+</header>
+<main class="center">
+ <div class="orb"><div class="core"></div></div>
+ <h1>NEXUS</h1>
+ <div class="sub">YOUR PERSONAL AI ASSISTANT</div>
+</main>
+<div class="output" id="output">
+ System bereit. Willkommen zurück.
+</div>
+<div class="controls">
+ <button onclick="speak()">INITIALIZE VOICE</button>
+</div>
+<footer>NEXUS AI · PERSONAL SYSTEM</footer>
+</div>
+<script>
+function speak(){
+ const message="Hallo. Ich bin Nexus. Dein persönlicher Assistent. System bereit.";
+ document.getElementById("output").textContent=message;
+ if("speechSynthesis" in window){
+  speechSynthesis.cancel();
+  const voice=new SpeechSynthesisUtterance(message);
+  voice.lang="de-DE";
+  speechSynthesis.speak(voice);
+ }
+}
+</script>
+</body>
+</html>
